@@ -8,6 +8,10 @@ class RentOutHouseIH(private val obj: Any) : InvocationHandler {
     // 调用被代理的方法
     // 因为传参不确定，所以用*args.orEmpty()
     override fun invoke(proxy: Any?, method: Method?, args: Array<out Any>?): Any? {
-        return method?.invoke(obj, *args.orEmpty())
+        val result = method?.invoke(obj, *args.orEmpty())
+        if (method?.name?.equals("showingHouse") == true) {
+            println("有客户去看房了")
+        }
+        return result
     }
 }
